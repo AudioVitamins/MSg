@@ -43,6 +43,11 @@ public:
     
     PopupMenu dropdownMenu;
 
+	struct PluginName {
+		String name;
+		int Id;
+	};
+
 private:
     
     unsigned slot_index;

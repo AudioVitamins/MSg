@@ -29,21 +29,16 @@ AudioVitaminsAudioProcessor::AudioVitaminsAudioProcessor()
     auditionAcc=0;
 	numActive=0;
 
-    if(gAppProperties == nullptr)
-    {
-        PropertiesFile::Options options;
-        options.applicationName     = "AudioVitaminsMSG";
-        options.filenameSuffix      = "settings";
-        options.osxLibrarySubFolder = "Preferences"; // check the correct directory
-        
-        gAppProperties = new ApplicationProperties();
-        gAppProperties->setStorageParameters (options);
-    }
     
-    if(knownPluginList == nullptr)
-    {
-        knownPluginList = new juce::KnownPluginList;
-    }
+    PropertiesFile::Options options;
+    options.applicationName     = "AudioVitaminsMSG";
+    options.filenameSuffix      = "settings";
+    options.osxLibrarySubFolder = "Preferences"; // check the correct directory
+        
+    gAppProperties = new ApplicationProperties();
+    gAppProperties->setStorageParameters (options);
+    
+    knownPluginList = new juce::KnownPluginList;
     
     deadMansPedalFile = gAppProperties->getUserSettings()->getFile().getSiblingFile ("RecentlyCrashedPluginsList");
     
@@ -122,7 +117,10 @@ AudioVitaminsAudioProcessor::AudioVitaminsAudioProcessor()
 AudioVitaminsAudioProcessor::~AudioVitaminsAudioProcessor()
 {
     gAppProperties->closeFiles();
-    deleteAndZero(gAppProperties);
+	gAppProperties =  nullptr;
+	knownPluginList = nullptr;
+	pluginAssignProcessor[0]  = nullptr;
+	pluginAssignProcessor[1]  = nullptr;
 }
 
 void AudioVitaminsAudioProcessor::changeListenerCallback (ChangeBroadcaster*)

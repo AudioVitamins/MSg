@@ -12,6 +12,7 @@
 #include "PluginSlotComponent.h"
 #include "MainViewComponent.h"
 #include "PluginWindow.h"
+#include <map>
 
 #define REMOVEPLUGIN  10000
 #define LOADPRESET    10001
@@ -93,33 +94,86 @@ void PluginSlotComponent::buttonClicked (Button* buttonThatWasClicked)
     {
         MainViewComponent * mv = (MainViewComponent*)getParentComponent();
 
-        PopupMenu auMenu; // remove AU menu link for win version... // comment for compile
-        PopupMenu vstMenu;
-        PopupMenu vst3Menu;
-        
+        std::map<String, Array<PluginName>> AuList;
+		std::map<String, Array<PluginName>> VstList;
+		std::map<String, Array<PluginName>> Vst3List;
         // do search for plugins and add to au/vst menu
         for (int i = 0; i < mv->processor->knownPluginList->getNumTypes(); i++)
         {
             PluginDescription * desc = mv->processor->knownPluginList->getType(i);
             
-            if (!desc->isInstrument)
-            {
-                if (desc->pluginFormatName == "AudioUnit")
+          //  int assignChannels = desc->numOutputChannels;
+          //  int plugChannels = mv->processor->getNumInputChannels();
+            
+           // if (assignChannels <= plugChannels)
+           // {
+                if (!desc->isInstrument)
                 {
-                    auMenu.addItem(i+1, desc->name); // remove AU menu link for win version... // comment for compile
+					if (desc->pluginFormatName == "AudioUnit")
+					{
+						PluginName plug;
+						plug.name = desc->name;
+						plug.Id = i+1;
+						AuList[desc->manufacturerName].add(plug);
+                    }
+                    else if (desc->pluginFormatName =="VST")
+                    {
+						PluginName plug;
+						plug.name = desc->name;
+						plug.Id = i + 1;
+						VstList[desc->manufacturerName].add(plug);
+                    }
+                    else if (desc->pluginFormatName =="VST3")
+                    {
+						PluginName plug;
+						plug.name = desc->name;
+						plug.Id = i + 1;
+						Vst3List[desc->manufacturerName].add(plug);
+                    }
+                    // might need extra for VST3..
                 }
-                else if (desc->pluginFormatName =="VST")
-                {
-                    vstMenu.addItem(i+1, desc->name);
-                }
-                else if (desc->pluginFormatName =="VST3")
-                {
-                    vst3Menu.addItem(i+1, desc->name);
-                }
-                // might need extra for VST3..
-            }
+           // }
         }
         
+		PopupMenu auMenu;
+		for (std::map<String, Array<PluginName>>::iterator it = AuList.begin(); it != AuList.end(); ++it) {
+			PopupMenu manMenu;
+			for (int i = 0; i < it->second.size(); i++) {
+				manMenu.addItem(it->second[i].Id, it->second[i].name);
+			}
+			if (it->first.isEmpty()) {
+				auMenu.addSubMenu("UnKnown", manMenu);
+			}
+			else {
+				auMenu.addSubMenu(it->first, manMenu);
+			}
+		}
+		PopupMenu vstMenu;
+		for (std::map<String, Array<PluginName>>::iterator it = VstList.begin(); it != VstList.end(); ++it) {
+			PopupMenu manMenu;
+			for (int i = 0; i < it->second.size(); i++) {
+				manMenu.addItem(it->second[i].Id, it->second[i].name);
+			}
+			if (it->first.isEmpty()) {
+				vstMenu.addSubMenu("UnKnown", manMenu);
+			}
+			else {
+				vstMenu.addSubMenu(it->first, manMenu);
+			}
+		}
+		PopupMenu vst3Menu;
+		for (std::map<String, Array<PluginName>>::iterator it = Vst3List.begin(); it != Vst3List.end(); ++it) {
+			PopupMenu manMenu;
+			for (int i = 0; i < it->second.size(); i++) {
+				manMenu.addItem(it->second[i].Id, it->second[i].name);
+			}
+			if (it->first.isEmpty()) {
+				vst3Menu.addSubMenu("UnKnown", manMenu);
+			}
+			else {
+				vst3Menu.addSubMenu(it->first, manMenu);
+			}
+		}
     
         PopupMenu loadMenu;
         

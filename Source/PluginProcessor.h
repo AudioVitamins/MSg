@@ -75,8 +75,8 @@ public:
     
     
     int effect_slot[2];
-    ApplicationProperties* gAppProperties;
-    KnownPluginList* knownPluginList;
+    ScopedPointer<ApplicationProperties> gAppProperties;
+    ScopedPointer<KnownPluginList> knownPluginList;
     AudioPluginFormatManager fPluginManager;
     
     OwnedArray <PluginDescription> internalTypes;
@@ -111,7 +111,7 @@ public:
 
     
     // Effects Rack
-    PluginAssignProcessor   * pluginAssignProcessor[2];
+    ScopedPointer<PluginAssignProcessor> pluginAssignProcessor[2];
     bool activeSlot[2];
     bool shouldAudition[2];
     bool audition[2];
