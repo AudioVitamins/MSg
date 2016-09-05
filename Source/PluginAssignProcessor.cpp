@@ -25,6 +25,9 @@ pluginList(pluginList)
     delay[1] = new Delay(44100);
     
     slotRef = slot;
+#if JucePlugin_Build_AAX
+	startTimer(500);
+#endif
 }
 
 const String PluginAssignProcessor::getName() const
@@ -50,9 +53,19 @@ float PluginAssignProcessor::getParameter (int index)
     else return 0; // should prob return 0 in this case
 }
 
-void PluginAssignProcessor::setParameter (int index, float newValue)
-{
-    if (index == SLOT_PLUGINREF)
+#if JucePlugin_Build_AAX
+void PluginAssignProcessor::timerCallback(){
+	while (!parameters.empty())
+	{
+		Parameter para = parameters.front();
+		parameters.pop();
+		setParameterTimer(para.Index, para.Value);
+	}
+}
+#endif
+
+void PluginAssignProcessor::setParameterTimer (int index, float newValue) {
+	if (index == SLOT_PLUGINREF)
     {
        // if (newValue != -1)
         if (newValue > 0)
@@ -95,6 +108,19 @@ void PluginAssignProcessor::setParameter (int index, float newValue)
     {
         if (hasPlugin) instance->setParameter(index-SLOT_PARAM_1, newValue); 
     }
+}
+
+void PluginAssignProcessor::setParameter (int index, float newValue)
+{
+#if JucePlugin_Build_AAX
+	Parameter para;
+	para.Index =  index;
+	para.Value = newValue;
+	parameters.push(para);
+#else
+	setParameterTimer(index, newValue);
+#endif
+    
 }
 
 const String PluginAssignProcessor::getParameterName (int index)
