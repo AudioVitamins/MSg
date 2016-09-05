@@ -23,11 +23,20 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Delay.h"
+#include <queue>
 
-class PluginAssignProcessor : public AudioProcessor //public AudioProcessorGraph
+class PluginAssignProcessor : public AudioProcessor 
+ #if JucePlugin_Build_AAX
+	,public Timer//public AudioProcessorGraph
+#endif
 {
-    
-    
+#if JucePlugin_Build_AAX
+	struct Parameter{
+		int Index;
+		float Value;
+	};
+	std::queue<Parameter> parameters;
+#endif
 public:
 
     const String getName() const;
@@ -46,7 +55,10 @@ public:
     
     float getParameter (int index);
     void setParameter (int index, float newValue);
-    
+	void setParameterTimer (int index, float newValue);
+#if JucePlugin_Build_AAX
+	void timerCallback();
+#endif
     const String getParameterName (int index);
     const String getParameterText (int index);
     
