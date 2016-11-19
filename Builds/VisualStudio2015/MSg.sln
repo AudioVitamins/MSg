@@ -1,23 +1,20 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2012
+# Visual Studio 2015
 Project("{4624ECF6-7B37-809A-656D-8195A2B14F87}") = "MSg", "MSg.vcxproj", "{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug_AAX|x64 = Debug_AAX|x64
-		Release_AAX|x64 = Release_AAX|x64
 		Debug_VST|x64 = Debug_VST|x64
 		Release_VST|x64 = Release_VST|x64
+		Release_AAX|x64 = Release_AAX|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Debug_AAX|x64.ActiveCfg = Debug_AAX|x64
-		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Debug_AAX|x64.Build.0 = Debug_AAX|x64
-		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Release_AAX|x64.ActiveCfg = Release_AAX|x64
-		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Release_AAX|x64.Build.0 = Release_AAX|x64
 		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Debug_VST|x64.ActiveCfg = Debug_VST|x64
 		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Debug_VST|x64.Build.0 = Debug_VST|x64
 		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Release_VST|x64.ActiveCfg = Release_VST|x64
 		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Release_VST|x64.Build.0 = Release_VST|x64
+		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Release_AAX|x64.ActiveCfg = Release_AAX|x64
+		{CFB723D7-4554-5E03-A9EF-F6D6CD886FFA}.Release_AAX|x64.Build.0 = Release_AAX|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

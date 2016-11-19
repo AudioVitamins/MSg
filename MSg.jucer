@@ -2,16 +2,22 @@
 
 <JUCERPROJECT id="Ibj3aW" name="MSg" projectType="audioplug" version="1.1.0"
               bundleIdentifier="com.AudioVitamins.MSg" includeBinaryInAppConfig="0"
-              buildVST="0" buildVST3="0" buildAU="0" buildRTAS="0" buildAAX="1"
+              buildVST="1" buildVST3="1" buildAU="0" buildRTAS="0" buildAAX="1"
               pluginName="MSg" pluginDesc="MSg" pluginManufacturer="AudioVitamins"
               pluginManufacturerCode="AUVI" pluginCode="MSGX" pluginChannelConfigs="{2, 2}"
               pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
               pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="1"
               pluginAUExportPrefix="MSgAU" pluginRTASCategory="" aaxIdentifier="com.AudioVitamins.MSg"
-              pluginAAXCategory="AAX_ePlugInCategory_SoundField" jucerVersion="4.2.1"
+              pluginAAXCategory="AAX_ePlugInCategory_SoundField" jucerVersion="4.2.3"
               buildAUv3="0" pluginIsMidiEffectPlugin="0">
   <MAINGROUP id="Be22B6" name="MSg">
     <GROUP id="{6E9B3325-6A5B-9829-0D33-2A03CFA61FAE}" name="Source">
+      <GROUP id="{D6090B89-6D13-9AF7-CCE9-F033AAEC509B}" name="Authentication">
+        <FILE id="mAqSGv" name="Authentication.cpp" compile="1" resource="0"
+              file="Source/Authentication/Authentication.cpp"/>
+        <FILE id="tRdxYB" name="Authentication.h" compile="0" resource="0"
+              file="Source/Authentication/Authentication.h"/>
+      </GROUP>
       <FILE id="yfaQVf" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>
       <FILE id="zPRxfj" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
       <FILE id="w9N0ct" name="MainViewComponent.cpp" compile="1" resource="0"
@@ -76,66 +82,73 @@
                        isDebug="0" optimisation="3" targetName="MSg"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_audio_basics" path="../../modules"/>
-        <MODULEPATH id="juce_audio_devices" path="../../modules"/>
-        <MODULEPATH id="juce_audio_formats" path="../../modules"/>
-        <MODULEPATH id="juce_audio_plugin_client" path="../../modules"/>
-        <MODULEPATH id="juce_audio_processors" path="../../modules"/>
-        <MODULEPATH id="juce_core" path="../../modules"/>
-        <MODULEPATH id="juce_cryptography" path="../../modules"/>
-        <MODULEPATH id="juce_data_structures" path="../../modules"/>
-        <MODULEPATH id="juce_events" path="../../modules"/>
-        <MODULEPATH id="juce_graphics" path="../../modules"/>
-        <MODULEPATH id="juce_gui_basics" path="../../modules"/>
-        <MODULEPATH id="juce_gui_extra" path="../../modules"/>
-        <MODULEPATH id="juce_opengl" path="../../modules"/>
-        <MODULEPATH id="juce_video" path="../../modules"/>
-        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../FrameWork/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <VS2012 targetFolder="Builds/VisualStudio2012" vstFolder="G:\VST3 SDK"
-            vst3Folder="G:\VST3 SDK" aaxFolder="G:\AAX_SDK">
+    <VS2015 targetFolder="Builds/VisualStudio2015" vstFolder="D:\Working\FrameWork\VST3 SDK"
+            vst3Folder="D:\Working\FrameWork\VST3 SDK" aaxFolder="D:\Working\FrameWork\AAX_SDK">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="1" optimisation="1" targetName="MSg" fastMath="0"/>
-        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
-                       isDebug="0" optimisation="3" targetName="MSg"/>
+        <CONFIGURATION name="Debug_VST" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="1" optimisation="1" targetName="$(ProjectName)" binaryPath="$(Configuration)\$(PlatformName)"
+                       intermediatesPath="int\$(ProjectName)\$(Configuration)\$(PlatformName)"/>
+        <CONFIGURATION name="Release_VST" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       isDebug="0" optimisation="3" targetName="$(ProjectName)" binaryPath="$(Configuration)\$(PlatformName)"
+                       intermediatesPath="int\$(ProjectName)\$(Configuration)\$(PlatformName)"
+                       postbuildCommand="copy /Y &quot;$(OutDir)\$(TargetFileName)&quot; &quot;D:\Working\OutputPLugin\$(OutDir)\$(TargetName).vst3&quot;"/>
+        <CONFIGURATION name="Release_AAX" winWarningLevel="4" generateManifest="1" winArchitecture="x64"
+                       targetName="$(ProjectName)" binaryPath="$(Configuration)\$(PlatformName)"
+                       intermediatesPath="int\$(ProjectName)\$(Configuration)\$(PlatformName)"
+                       postbuildCommand="taskkill /IM ProTools.exe /f&#10;xcopy /Y /S $(Configuration) &quot;C:\Program Files\Avid\Pro Tools Developer\Plug-Ins\&quot;&#10;&#10;start &quot;C:\Program Files\Avid\Pro Tools Developer\&quot; ProTools.exe"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
-        <MODULEPATH id="juce_video" path="../../juce"/>
-        <MODULEPATH id="juce_opengl" path="../../juce"/>
-        <MODULEPATH id="juce_gui_extra" path="../../juce"/>
-        <MODULEPATH id="juce_gui_basics" path="../../juce"/>
-        <MODULEPATH id="juce_graphics" path="../../juce"/>
-        <MODULEPATH id="juce_events" path="../../juce"/>
-        <MODULEPATH id="juce_data_structures" path="../../juce"/>
-        <MODULEPATH id="juce_cryptography" path="../../juce"/>
-        <MODULEPATH id="juce_core" path="../../juce"/>
-        <MODULEPATH id="juce_audio_processors" path="../../juce"/>
-        <MODULEPATH id="juce_audio_plugin_client" path="../../juce"/>
-        <MODULEPATH id="juce_audio_formats" path="../../juce"/>
-        <MODULEPATH id="juce_audio_devices" path="../../juce"/>
-        <MODULEPATH id="juce_audio_basics" path="../../juce"/>
-        <MODULEPATH id="juce_audio_utils" path="../../modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../FrameWork/JUCE/modules"/>
+        <MODULEPATH id="juce_video" path="../FrameWork/JUCE/modules"/>
       </MODULEPATHS>
-    </VS2012>
+    </VS2015>
   </EXPORTFORMATS>
   <MODULES>
-    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="1"/>
-    <MODULE id="juce_video" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_video" showAllCode="1" useLocalCopy="0"/>
   </MODULES>
   <JUCEOPTIONS JUCE_QUICKTIME="disabled" JUCE_PLUGINHOST_VST="enabled" JUCE_PLUGINHOST_VST3="enabled"
                JUCE_PLUGINHOST_AU="enabled"/>

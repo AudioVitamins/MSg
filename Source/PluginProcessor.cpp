@@ -15,6 +15,11 @@
 //==============================================================================
 AudioVitaminsAudioProcessor::AudioVitaminsAudioProcessor()
 {
+#if DEMO_VERSION
+	authentication = new Authentication();
+#else
+	authentication = new Authentication(false);
+#endif
 	dryLatency=0;
 	isPlaying = false;
     currentBar=0;
@@ -434,7 +439,7 @@ void AudioVitaminsAudioProcessor::releaseResources()
 void AudioVitaminsAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
 {
    
-    
+	if (!authentication->isValidDate())  return;
     // Input VU -- will need to add latency adjustment to this..
     // ===========================================================================
     for (int channel = 0; channel < getNumInputChannels(); ++channel)

@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 4.2.1
+  Created with Projucer version: 4.2.3
 
   ------------------------------------------------------------------------------
 
@@ -112,7 +112,6 @@ public:
     //[UserMethods]     -- You can add your own custom methods in this section.
     AudioVitaminsAudioProcessor * processor;
     void setProcessor (AudioVitaminsAudioProcessor * proc) { processor = proc; } //pluginBrowserComponent = new
-
     void ViewPlugins(bool display)
     {
         if (display) { }
@@ -211,7 +210,7 @@ public:
         bool questionAU = false;
         bool questionVST = false;
         bool questionVST3 = false;
-        
+
         bool skipAU = false;
         bool skipVST = false;
         bool skipVST3 = false;
@@ -221,7 +220,7 @@ public:
         for (int i = 0; i < processor->fPluginManager.getNumFormats(); i++)
         {
             AudioPluginFormat* const format = processor->fPluginManager.getFormat(i);
-            
+
            	FileSearchPath fsp ;
             bool shouldScan = false;
             if(format->getName() == pfau){
@@ -236,17 +235,17 @@ public:
                                                   String::empty,
                                                   nullptr,
                                                   nullptr);
-                    
+
                     fspAU = format->getDefaultLocationsToSearch() ;
                     questionAU = true;
                     skipAU = !shouldScan;
                 }
-                
+
                 if(skipAU){
                     continue;
                 }
                 fsp = fspAU;
-                
+
             } else if(format->getName() == pfvst){
                 if ( !questionVST && !skipVST){
                     WildcardFileFilter wildcardFilter ("*.vst", String::empty, "Foo files");
@@ -259,7 +258,7 @@ public:
                                                   String::empty,
                                                   nullptr,
                                                   nullptr);
-                    
+
                    //if (juce::NativeMessageBox::showOkCancelBox.show())
                    // {
                     fspVST =format->getDefaultLocationsToSearch() ; //"/Library/Audio/Plugins/VST/";
@@ -283,7 +282,7 @@ public:
                                                   String::empty,
                                                   nullptr,
                                                   nullptr);
-                    
+
                     //if (juce::NativeMessageBox::showOkCancelBox.show())
                     //{
                     fspVST3 = format->getDefaultLocationsToSearch() ;//"/Library/Audio/Plugins/VST3/";
@@ -296,10 +295,10 @@ public:
                 }
                 fsp = fspVST3;
             }
-            
+
             PluginDirectoryScanner * scanner = new PluginDirectoryScanner(*processor->knownPluginList, *format, fsp, true, processor->deadMansPedalFile);
             String plugName;
-            
+
             if (shouldScan)
             {
                 while (scanner->scanNextFile(true, plugName))
@@ -326,7 +325,6 @@ public:
     void setLastSearchPath (PropertiesFile& properties, AudioPluginFormat& format,
                             const FileSearchPath& newPath);
 
-    void buttonClicked (Button* buttonThatWasClicked);
     void sliderValueChanged (Slider* sliderThatWasMoved);
 
     void timerCallback();
@@ -362,6 +360,8 @@ public:
     static const int whitered_dial_1010_60x60_horizontal_pngSize;
     static const char* whitered_dial_1010_60x60_vertical_png;
     static const int whitered_dial_1010_60x60_vertical_pngSize;
+    static const char* msg_expireddemo_png;
+    static const int msg_expireddemo_pngSize;
 
 
 private:

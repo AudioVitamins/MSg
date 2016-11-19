@@ -1,0 +1,11 @@
+Builds/VisualStudio2012/int/MSg/Debug_VST/x64/CL.47584.write.1.tlog
+Builds/VisualStudio2012/int/MSg/
+JuceLibraryCode/
+Builds/VisualStudio2015/int/MSg/Release_AAX/
+Builds/VisualStudio2015/int/MSg/Release/
+Builds/VisualStudio2015/int/
+Builds/VisualStudio2015/Release_AAX_Demo/MSg.aaxplugin/Contents/x64/MSg.lib
+Builds/VisualStudio2015/Release_AAX_Com/
+*.db
+Builds/VisualStudio2012/Debug_VST/
+Builds/VisualStudio2015/Release_AAX_Demo/

@@ -18,7 +18,8 @@
 #include "PluginAssignProcessor.h"
 #include "params.h"
 #include "Delay.h"
-
+#include "Authentication/Authentication.h"
+#define DEMO_VERSION  0
 class AudioVitaminsAudioProcessor  : public AudioProcessor, public ChangeListener
 {
 public:
@@ -182,7 +183,7 @@ public:
     // Dry buffer delays
     Delay * delay[2];
     
-
+	ScopedPointer<Authentication> authentication;
 private:
     
     // param array temp
@@ -197,6 +198,7 @@ private:
     float wetdrySide;
     
     int32 nodeID;
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioVitaminsAudioProcessor)
 };
