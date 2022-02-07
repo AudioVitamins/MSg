@@ -109,7 +109,7 @@ bool Authentication::loadFromFile() {
 			size_t lenName = m.getSize() - count + 1;
 			char *text = new char[lenName];
 			m.copyTo(text, count, lenName);
-			delete text;
+			delete[] text;
 		}
 	}
 	return true;

@@ -16,7 +16,7 @@
 //==============================================================================
 /*
 */
-class PluginSlotComponent    : public Component, public ButtonListener
+class PluginSlotComponent    : public Component, public Button::Listener
 {
 public:
     PluginSlotComponent();

@@ -103,7 +103,7 @@ void PluginSlotComponent::buttonClicked (Button* buttonThatWasClicked)
             PluginDescription * desc = mv->processor->knownPluginList->getType(i);
             
           //  int assignChannels = desc->numOutputChannels;
-          //  int plugChannels = mv->processor->getNumInputChannels();
+          //  int plugChannels = mv->processor->getTotalNumInputChannels();
             
            // if (assignChannels <= plugChannels)
            // {

@@ -166,10 +166,10 @@ bool PluginAssignProcessor::producesMidi() const
 //==============================================================================
 void PluginAssignProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    this->setPlayConfigDetails(getNumInputChannels(), getNumOutputChannels(), sampleRate, samplesPerBlock);
+    this->setPlayConfigDetails(getTotalNumInputChannels(), getTotalNumOutputChannels(), sampleRate, samplesPerBlock);
 
     if (hasPlugin) {
-      instance->setPlayConfigDetails(getNumInputChannels(), getNumOutputChannels(), sampleRate, samplesPerBlock);
+      instance->setPlayConfigDetails(getTotalNumInputChannels(), getTotalNumOutputChannels(), sampleRate, samplesPerBlock);
       instance->prepareToPlay(sampleRate, samplesPerBlock);
     }
 }
@@ -186,12 +186,12 @@ void PluginAssignProcessor::processBlock (AudioSampleBuffer&buffer, MidiBuffer&m
     //int plugNumChannels=0;
     
  /*   if (instance) {
-        plugNumChannels = instance->getNumInputChannels();
+        plugNumChannels = instance->getTotalNumInputChannels();
     }else plugNumChannels = 0;
   */
     
-   // int plugNumChannels = instance->getNumInputChannels();
-   // int plugNumChannels = instance->getNumInputChannels();
+   // int plugNumChannels = instance->getTotalNumInputChannels();
+   // int plugNumChannels = instance->getTotalNumInputChannels();
     
     
   //  if (plugNumChannels > numChannels) {
@@ -211,7 +211,7 @@ void PluginAssignProcessor::processBlock (AudioSampleBuffer&buffer, MidiBuffer&m
         
         if (slot_latency_in_samples)
         {
-            for (int c = 0; c < getNumOutputChannels(); c++)
+            for (int c = 0; c < getTotalNumOutputChannels(); c++)
             {
                 float * data = buffer.getWritePointer(c);
                 for (int i = 0; i < getBlockSize(); i++)
@@ -254,7 +254,7 @@ bool PluginAssignProcessor::loadNewPlugin(const PluginDescription*desc)
         //recreate it
         String errorMessage;
         instance = formatManager.createPluginInstance(*desc, getSampleRate(), getBlockSize(), errorMessage);
-        instance->setPlayConfigDetails(getNumInputChannels(), getNumOutputChannels(), getSampleRate(), getBlockSize());
+        instance->setPlayConfigDetails(getTotalNumInputChannels(), getTotalNumOutputChannels(), getSampleRate(), getBlockSize());
         instance->prepareToPlay(getSampleRate(), getBlockSize());
         hasPlugin = true;
     }

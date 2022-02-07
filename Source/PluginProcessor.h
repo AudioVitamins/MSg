@@ -19,7 +19,7 @@
 #include "params.h"
 #include "Delay.h"
 #include "Authentication/Authentication.h"
-#define DEMO_VERSION  0
+#define DEMO_VERSION  1
 class AudioVitaminsAudioProcessor  : public AudioProcessor, public ChangeListener
 {
 public:
@@ -72,7 +72,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     
-    void changeListenerCallback (ChangeBroadcaster*);
+    void changeListenerCallback (ChangeBroadcaster*) override;
     
     
     int effect_slot[2];

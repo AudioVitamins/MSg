@@ -420,7 +420,7 @@ void AudioVitaminsAudioProcessor::prepareToPlay (double sampleRate, int samplesP
 {
     for (int i = 0; i<2; i++)
     {
-        pluginAssignProcessor[i]->setPlayConfigDetails(getNumInputChannels(), getNumOutputChannels(), sampleRate, samplesPerBlock);
+        pluginAssignProcessor[i]->setPlayConfigDetails(getTotalNumInputChannels(), getTotalNumOutputChannels(), sampleRate, samplesPerBlock);
         pluginAssignProcessor[i]->prepareToPlay(sampleRate, samplesPerBlock);
     } 
 }
@@ -442,7 +442,7 @@ void AudioVitaminsAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiB
 	if (!authentication->isValidDate())  return;
     // Input VU -- will need to add latency adjustment to this..
     // ===========================================================================
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
+    for (int channel = 0; channel < getTotalNumInputChannels(); ++channel)
     {
         vuValue[channel] = buffer.getMagnitude(channel, 0, buffer.getNumSamples());
         //vuValue[channel] = tempBuffer.getMagnitude(channel, 0, buffer.getNumSamples());
@@ -647,7 +647,7 @@ void AudioVitaminsAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiB
  
     // Output VU
     // ===========================================================================
-    for (int channel = 0; channel < getNumInputChannels(); ++channel)
+    for (int channel = 0; channel < getTotalNumInputChannels(); ++channel)
     {
         vuValue[channel + 4] = buffer.getMagnitude(channel, 0, buffer.getNumSamples());
     }

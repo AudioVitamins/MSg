@@ -378,7 +378,7 @@ void MainViewComponent::sliderValueChanged (Slider* sliderThatWasMoved)
   //  {
   //      rescanPlugins();
   //  }
-/*    if (buttonThatWasClicked == button_reset)
+   if (buttonThatWasClicked == button_reset)
     {
         AudioVitaminsAudioProcessor * proc = (AudioVitaminsAudioProcessor*)processor;
         proc->resetBarCounter();

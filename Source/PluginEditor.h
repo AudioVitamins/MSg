@@ -37,7 +37,7 @@
 */
 class AudioVitaminsAudioProcessorEditor  : public AudioProcessorEditor,
                                            public Timer,
-                                           public ButtonListener
+public Button::Listener
 {
 public:
     //==============================================================================
@@ -50,7 +50,7 @@ public:
 
     void paint (Graphics& g) override;
     void resized() override;
-    void buttonClicked (Button* buttonThatWasClicked) override;
+    void buttonClicked (Button* buttonThatWasClicked);
 
     // Binary resources:
     static const char* msg_expireddemo_png;

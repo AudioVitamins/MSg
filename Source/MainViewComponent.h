@@ -55,7 +55,7 @@ public:
 	}
 
 	//==============================================================================
-	void paint(Graphics& g)
+	void paint(Graphics& g) override
 	{
 		//[UserPrePaint] Add your own custom painting code here..
 		//[/UserPrePaint]
@@ -100,7 +100,7 @@ public:
                                                                     //[/Comments]
 */
 class MainViewComponent  : public Component,
-                           public SliderListener,
+                public Slider::Listener,
                            public Timer
 {
 public:
@@ -325,9 +325,9 @@ public:
     void setLastSearchPath (PropertiesFile& properties, AudioPluginFormat& format,
                             const FileSearchPath& newPath);
 
-    void sliderValueChanged (Slider* sliderThatWasMoved);
+    void sliderValueChanged (Slider* sliderThatWasMoved) override;
 
-    void timerCallback();
+    void timerCallback() override;
 
     void syncUIFromProcessor();
     void computeMeters();
